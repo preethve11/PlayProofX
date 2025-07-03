@@ -1,4 +1,5 @@
-const { logSessionToChain, getChain } = require('../src/blockchain/log');
+
+const { logSessionToChain, getChain } = require('../blockchain/log');
 
 const testSession = {
   sessionId: 'test-session-001',

@@ -1,0 +1,25 @@
+{
+  "name": "playproof-x",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/preethve11/PlayProofX.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/preethve11/PlayProofX/issues"
+  },
+  "homepage": "https://github.com/preethve11/PlayProofX#readme",
+  "dependencies": {
+    "chart.js": "^4.5.0",
+    "crypto-js": "^4.2.0",
+    "react-chartjs-2": "^5.3.0"
+  }
+}
