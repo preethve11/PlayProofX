@@ -1,7 +1,7 @@
 {
   "name": "playproof-x",
   "version": "1.0.0",
-  "description": "",
+  "description": "Gambling session analysis tool with AI-powered fairness detection and blockchain logging",
   "type": "module",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,17 @@
     "type": "git",
     "url": "git+https://github.com/preethve11/PlayProofX.git"
   },
-  "keywords": [],
+  "keywords": [
+    "gambling",
+    "fairness",
+    "blockchain",
+    "analysis",
+    "react",
+    "vite",
+    "transparency",
+    "gaming",
+    "risk-assessment"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
