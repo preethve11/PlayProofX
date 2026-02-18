@@ -6,27 +6,41 @@
  * @returns {Object} result - Analysis outcome
  */
 function analyzeSession(session) {
+  if (session == null || typeof session !== 'object') {
+    return {
+      winRate: 0,
+      lossStreak: false,
+      verdict: 'Session appears fair',
+      severity: 'low',
+    };
+  }
+
   const {
-    gamesPlayed,
-    wins,
-    losses,
-    totalLossAmount,
-    startBalance,
+    gamesPlayed = 0,
+    wins = 0,
+    totalLossAmount = 0,
+    startBalance = 0,
     betHistory,
   } = session;
 
+  const safeBetHistory = Array.isArray(betHistory) ? betHistory : [];
+  const safeGamesPlayed = Number(gamesPlayed) || 0;
+  const safeWins = Number(wins) || 0;
+  const safeTotalLossAmount = Number(totalLossAmount) || 0;
+  const safeStartBalance = Number(startBalance) || 0;
+
   // Calculate win rate as a percentage
-  const winRate = gamesPlayed > 0 ? (wins / gamesPlayed) * 100 : 0;
+  const winRate = safeGamesPlayed > 0 ? (safeWins / safeGamesPlayed) * 100 : 0;
 
   // Check if last 3 games were all losses
-  const lastThreeBets = betHistory.slice(-3);
-  const lossStreak = lastThreeBets.length === 3 && lastThreeBets.every(bet => bet.result === 'loss');
+  const lastThreeBets = safeBetHistory.slice(-3);
+  const lossStreak = lastThreeBets.length === 3 && lastThreeBets.every(bet => bet && bet.result === 'loss');
 
   // Rule 1: Unfair if winRate < 30% over 10+ games
-  const isUnfairWinRate = gamesPlayed >= 10 && winRate < 30;
+  const isUnfairWinRate = safeGamesPlayed >= 10 && winRate < 30;
 
   // Rule 2: Dangerous loss amount if losses exceed 3× starting balance
-  const isDangerousLoss = totalLossAmount > 3 * startBalance;
+  const isDangerousLoss = safeStartBalance > 0 && safeTotalLossAmount > 3 * safeStartBalance;
 
   // Decide verdict based on the rules above
   let verdict = "Session appears fair";
@@ -55,7 +69,4 @@ function analyzeSession(session) {
   };
 }
 
-// Export the module so it can be used in other files
-module.exports = {
-  analyzeSession,
-};
+export { analyzeSession };

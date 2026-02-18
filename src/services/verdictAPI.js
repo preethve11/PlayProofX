@@ -1,7 +1,6 @@
 // src/services/verdictAPI.js
 
-// Import the AI fairness analyzer function
-import { analyzeSession } from '../ai/riskAnalyzer';
+import { analyzeSession } from '../ai/riskAnalyzer.js';
 
 /**
  * analyzeGameSession
@@ -13,9 +12,6 @@ import { analyzeSession } from '../ai/riskAnalyzer';
  * @returns {Object} verdictResult - Includes verdict, winRate, severity, etc.
  */
 export function analyzeGameSession(sessionData) {
-  // Run the AI-based analysis
   const verdictResult = analyzeSession(sessionData);
-
-  // Return the result object to the caller (e.g., frontend UI)
   return verdictResult;
 }

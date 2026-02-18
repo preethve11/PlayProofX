@@ -1,18 +1,22 @@
 // src/blockchain/log.js
 
+import CryptoJS from 'crypto-js';
+
 // In-memory mock blockchain array
 const mockChain = [];
 
 /**
- * Generates a fake hash string using timestamp, session ID, and random suffix.
- * Simulates a blockchain-like hash for a block.
+ * Generates a hash string using timestamp, session ID, and random suffix.
+ * Uses crypto-js (SHA256) so it works in both Node and browser.
  * @param {string} sessionId
- * @returns {string} Simulated hash
+ * @returns {string} Hash string (0x + 64 hex chars)
  */
 function fakeHash(sessionId) {
   const timestamp = Date.now();
   const randomSuffix = Math.random().toString(36).substring(2, 10);
-  return `0x${Buffer.from(`${sessionId}-${timestamp}-${randomSuffix}`).toString('hex').slice(0, 64)}`;
+  const input = `${sessionId}-${timestamp}-${randomSuffix}`;
+  const hex = CryptoJS.SHA256(input).toString(CryptoJS.enc.Hex);
+  return `0x${hex.slice(0, 64)}`;
 }
 
 /**
@@ -44,8 +48,4 @@ function getChain() {
   return mockChain;
 }
 
-// Export functions
-module.exports = {
-  logSessionToChain,
-  getChain,
-};
+export { logSessionToChain, getChain };

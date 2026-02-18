@@ -1,5 +1,4 @@
-
-const { logSessionToChain, getChain } = require('../blockchain/log');
+import { logSessionToChain, getChain } from '../blockchain/log.js';
 
 const testSession = {
   sessionId: 'test-session-001',
